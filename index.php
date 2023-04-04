@@ -1,6 +1,6 @@
 <?php
 require_once('./models/contador.php');
-
+require_once('./models/password.php');
 
 $contador = new Contador(
   $_REQUEST['salida']?? $_COOKIE['numero']??0);
@@ -17,6 +17,11 @@ if (isset($restar)) {
   setcookie('numero', $contador->getCuenta());
 }
 
+$password = new Password(8);
+
+if (isset($pswrd)) {
+  $password->generarPassword();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,7 +39,13 @@ if (isset($restar)) {
 
   <input type="hidden" name="salida" value="<?=$contador->getCuenta();?>">
   <?=$contador->getCuenta();?>
+
+  <br>
+  <button name="pswrd">get pasword</button>
+  <?=$password->getcontraseña();?>
   </form>
+
+
 </body>
 
 </html>

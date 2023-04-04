@@ -10,7 +10,11 @@ class Password
   function __construct(?int $longitud)
   {
     $this->longitud = $longitud ?? 8;
-    $this->contraseña = $contraseña ?? 0;
+    $this->contraseña = $contraseña ?? '';
+  }
+  function getcontraseña()
+  {
+    return $this->contraseña;
   }
 
   public function esFuerte()
@@ -24,7 +28,7 @@ class Password
     $opc_letras = TRUE; //  FALSE para quitar las letras
     $opc_numeros = TRUE; // FALSE para quitar los números
     $opc_letrasMayus = TRUE; // FALSE para quitar las letras mayúsculas
-    $opc_especiales = FALSE; // FALSE para quitar los caracteres especiales
+    $opc_especiales = TRUE; // FALSE para quitar los caracteres especiales
     $password = "";
 
     $letras = "abcdefghijklmnopqrstuvwxyz";
@@ -50,6 +54,8 @@ class Password
     for ($i = 1; $i <= $this->longitud; $i++) {
       $password[$i] = $listado[rand(0, strlen($listado))];
       str_shuffle($listado);
+      $this->contraseña = $password;
+
     }
   }
 }
